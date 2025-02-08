@@ -1,0 +1,25 @@
+{
+  "name": "seifer",
+  "version": "0.0.1",
+  "description": "Syntactic Engine for Interpreting and Fathoming Expression Rules (parses a cypher query into an AST)",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lordcraymen/seifer.git"
+  },
+  "keywords": [
+    "cypher",
+    "prasing",
+    "AST",
+    "Typescript"
+  ],
+  "author": "Florian \"lordcraymen\" Patzke",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lordcraymen/seifer/issues"
+  },
+  "homepage": "https://github.com/lordcraymen/seifer#readme"
+}
