@@ -1,5 +1,5 @@
 import { CypherQuery } from "../../types";
-import { _validateCypherQuery } from "./_validateQuery";
+import { _validateCypherQuery } from "./_validateCypherQuery";
 import { getClauses } from "../Clauses";
 
 const getCypherQuery = (query: string): CypherQuery => {

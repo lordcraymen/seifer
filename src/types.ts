@@ -25,7 +25,6 @@ interface CypherQuery extends ASTNode {
 
 interface Clause extends ASTNode {
   type: string;
-  command: (typeof COMMANDS)[keyof typeof COMMANDS];
   // The text content of the clause.
   content: string;
 }
@@ -37,7 +36,6 @@ interface Clause extends ASTNode {
  */
 interface MatchClause extends Clause {
   type: "MatchClause";
-  command: typeof COMMANDS.MATCH;
   // The graph pattern that is matched.
   graphPattern: GraphPattern;
   // An optional WHERE predicate that further filters the matched pattern.
@@ -51,7 +49,6 @@ interface MatchClause extends Clause {
  */
 interface CreateClause extends Clause {
   type: "CreateClause";
-  command: typeof COMMANDS.CREATE;
   // The graph pattern that defines nodes and relationships to create.
   graphPattern: GraphPattern;
 }
@@ -63,7 +60,6 @@ interface CreateClause extends Clause {
  */
 interface ReturnClause extends Clause {
   type: "ReturnClause";
-  command: typeof COMMANDS.RETURN;
   // A list of projections. In Cypher, you can return expressions, properties, or computed values.
   projections: Projection[];
   // Optional modifier for distinct values.
@@ -81,7 +77,6 @@ interface ReturnClause extends Clause {
  */
 interface WhereClause extends Clause {
   type: "WhereClause";
-  command: "WHERE";
   // The boolean expression used for filtering.
   predicate: Expression;
 }
@@ -164,7 +159,6 @@ interface Projection extends ASTNode {
  */
 interface OrderByClause extends ASTNode {
   type: "OrderByClause";
-  command: "ORDER BY";
   // List of individual ordering items.
   orderItems: OrderItem[];
 }
