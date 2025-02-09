@@ -1,4 +1,4 @@
-import { CypherQuery } from "../../types";
+import { CypherQuery, Clause } from "../../types";
 /**
  * Validates the top-level AST of a Cypher query.
  *
@@ -11,27 +11,19 @@ import { CypherQuery } from "../../types";
  * @returns The input AST if it is valid.
  */
 const _validateCypherQuery = (ast: CypherQuery): CypherQuery => {
-  const clauses = ast.clauses;
+  if (!ast.clauses || ast.clauses.length === 0) {
+    throw new Error("Query must have at least one clause");
+  }
 
   // Count how many clauses are RETURN clauses.
-  const returnClauseCount = clauses.reduce((count, clause) => {
-    // Check if the clause object has a key 'RETURN'
-    return (
-      count + (Object.prototype.hasOwnProperty.call(clause, "RETURN") ? 1 : 0)
-    );
-  }, 0);
-
-  if (returnClauseCount > 1) {
+  if(ast.clauses.filter((clause) => clause.type === "ReturnClause").length > 1) {
     throw new Error("Multiple RETURN clauses found");
   }
 
   // If there's exactly one RETURN clause, it must be the last clause.
-  if (returnClauseCount === 1) {
-    const lastClause = clauses[clauses.length - 1];
-    if (!("RETURN" in lastClause)) {
-      throw new Error("RETURN clause must be the last clause");
-    }
-  }
+  if(ast.clauses.findIndex((clause) => clause.type === "ReturnClause") !== ast.clauses.length - 1) {
+    throw new Error("RETURN clause must be the last clause");
+  };
 
   return ast;
 };
