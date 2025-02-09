@@ -1,4 +1,6 @@
-const parsePropertyMap = (propertyMapString: string): Object =>
+import { PropertyMap } from "../../types";
+const getPropertyMap = (propertyMapString: string): PropertyMap =>
+    propertyMapString.trim() === '' ? {} :
     JSON.parse(propertyMapString.trim()
       // Step 1: Normalize object keys (ensure correct quoting)
       .replace(
@@ -23,6 +25,6 @@ const parsePropertyMap = (propertyMapString: string): Object =>
         '$1{ "reference": "$2" }$3'
       )
       // Step 7: Remove any trailing commas before closing braces or brackets
-      .replace(/,\s*([}\]])/g, '$1'));
+      .replace(/,\s*([}\]])/g, '$1')) as PropertyMap;
 
-export { parsePropertyMap };
+export { getPropertyMap };

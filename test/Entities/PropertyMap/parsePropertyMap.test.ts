@@ -1,6 +1,6 @@
-import { parsePropertyMap } from "../../src/parsers/parsePropertyMap";
+import { getPropertyMap } from "../../src/Entities/PropertyMap";
 
-describe("parsePropertyMap", () => {
+describe("getPropertyMap", () => {
   it("should parse a property map string with sloppy quotes ", () => {
     const pm = `{
         a: 1,
@@ -16,7 +16,7 @@ describe("parsePropertyMap", () => {
       d: { e: "f" },
       g: "h",
     };
-    expect(parsePropertyMap(pm)).toStrictEqual(expected);
+    expect(getPropertyMap(pm)).toStrictEqual(expected);
   });
 
   it("should normalize an object string with nested objects and arrays", () => {
@@ -36,7 +36,7 @@ describe("parsePropertyMap", () => {
       g: "h",
       i: [1, true, false, "test", "test"],
     };
-    expect(parsePropertyMap(pm)).toStrictEqual(expected);
+    expect(getPropertyMap(pm)).toStrictEqual(expected);
   });
   it("Should work with keys and values in foreign languages", () => {
     const pm = `{
@@ -61,7 +61,7 @@ describe("parsePropertyMap", () => {
         "русский": "русский",
         "中文": "中文"
       };
-    expect(parsePropertyMap(pm)).toStrictEqual(expected);
+    expect(getPropertyMap(pm)).toStrictEqual(expected);
   });
   it("Should work for deeply nested objects with keys and values", () => {
     const pm = `{
@@ -78,7 +78,7 @@ describe("parsePropertyMap", () => {
         "d": { "e": "f", "g": { "h": "i", "j": "k" } },
         "l": { "m": { "n": "o" } }
       };
-    expect(parsePropertyMap(pm)).toStrictEqual(expected);
+    expect(getPropertyMap(pm)).toStrictEqual(expected);
   });
   it("should work with deeply nested arrays with mixed and partially misqoted values", () => {
     const pm = `{
@@ -97,7 +97,7 @@ describe("parsePropertyMap", () => {
         "l": { "m": { "n": "o" } },
         "p": [1, "two", true, false, "five", "six", "seven", "eight", "nine", "ten", {"value": "eleven"}, "twelve"]
       };
-    expect(parsePropertyMap(pm)).toStrictEqual(expected);
+    expect(getPropertyMap(pm)).toStrictEqual(expected);
   });
   it("should replace unqotes values that are not valid JSON with 'reference' objects", () => {
     const pm = `{
@@ -114,6 +114,6 @@ describe("parsePropertyMap", () => {
         "d":{"reference":{"object":"a","property":"name"}},
         "e":{"reference":"b"}
         };
-    expect(parsePropertyMap(pm)).toStrictEqual(expected);
+    expect(getPropertyMap(pm)).toStrictEqual(expected);
   });
 });

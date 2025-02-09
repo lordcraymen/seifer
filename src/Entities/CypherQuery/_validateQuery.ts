@@ -1,4 +1,4 @@
-import { CypherQuery } from "../types";
+import { CypherQuery } from "../../types";
 /**
  * Validates the top-level AST of a Cypher query.
  *
@@ -10,7 +10,7 @@ import { CypherQuery } from "../types";
  * @throws An error if any of the syntactic rules are violated.
  * @returns The input AST if it is valid.
  */
-const validateCypherQuery = (ast: CypherQuery): CypherQuery => {
+const _validateCypherQuery = (ast: CypherQuery): CypherQuery => {
   const clauses = ast.clauses;
 
   // Count how many clauses are RETURN clauses.
@@ -36,4 +36,4 @@ const validateCypherQuery = (ast: CypherQuery): CypherQuery => {
   return ast;
 };
 
-export { validateCypherQuery };
+export { _validateCypherQuery };

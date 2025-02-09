@@ -1,4 +1,4 @@
-import { COMMANDS, Clause } from '../types';
+import { COMMANDS, Clause } from "../../types";
 
 type ProtoClause = { command: keyof typeof COMMANDS; content: string };
 
@@ -22,7 +22,7 @@ type ProtoClause = { command: keyof typeof COMMANDS; content: string };
  * @param query The raw Cypher query string.
  * @returns An array of protoclauses, each containing a command keyword and the clause text.
  */
-const splitClauses = (query: string): ProtoClause[] => {
+const _splitClauses = (query: string): ProtoClause[] => {
     // Trim the input to remove any leading/trailing whitespace.
     const trimmedQuery = query.trim();
   
@@ -51,15 +51,8 @@ const splitClauses = (query: string): ProtoClause[] => {
     return clauses;
   };
 
-  const getClauses = (query: string): Clause[] => {
-    const protoClauses = splitClauses(query);
-    return protoClauses.map((protoClause) => {
-      return {
-        type: protoClause.command,
-        command: COMMANDS[protoClause.command],
-        content: protoClause.content,
-      };
-    });
+  const _parseClauses = (query: string): ProtoClause[] => {
+    return _splitClauses(query);
   }
 
-  export { getClauses, splitClauses }
+  export { _parseClauses, _splitClauses, type ProtoClause };
