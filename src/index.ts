@@ -1,5 +1,13 @@
-function test() {
-  return 'Hello World!';
-}
+import { CypherQuery } from './types';
+import { validateCypherQuery } from './validatiors/validateQuery';
+import { getClauses } from './parsers/parseClauses';
 
-export { test };
+const parse = (query: string): CypherQuery => {
+  if (query === "") return { "type": "Query", "clauses": [] };
+  return validateCypherQuery({
+    type: "Query",
+    clauses: getClauses(query),
+  });
+};
+
+export { parse}
