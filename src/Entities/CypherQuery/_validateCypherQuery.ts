@@ -1,4 +1,4 @@
-import { CypherQuery, Clause } from "../../types";
+import { CypherQuery } from "../../types";
 /**
  * Validates the top-level AST of a Cypher query.
  *
@@ -21,9 +21,11 @@ const _validateCypherQuery = (ast: CypherQuery): CypherQuery => {
   }
 
   // If there's exactly one RETURN clause, it must be the last clause.
-  if(ast.clauses.findIndex((clause) => clause.type === "ReturnClause") !== ast.clauses.length - 1) {
+  const returnIndex = ast.clauses.findIndex((clause) => clause.type === "ReturnClause");
+  if (returnIndex !== -1 && returnIndex !== ast.clauses.length - 1) {
     throw new Error("RETURN clause must be the last clause");
-  };
+  }
+  
 
   return ast;
 };
