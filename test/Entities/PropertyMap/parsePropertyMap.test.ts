@@ -1,4 +1,4 @@
-import { getPropertyMap } from "../../src/Entities/PropertyMap";
+import { getPropertyMap } from "../../../src/Entities/PropertyMap/getPropertyMap";
 
 describe("getPropertyMap", () => {
   it("should parse a property map string with sloppy quotes ", () => {
