@@ -9,14 +9,11 @@ import { getGraphPatterns } from "../Patterns/GraphPatterns/getGraphPatterns";
  * @returns The processed CREATE clause.
  */
 const _parseCreateClause = (clause: ProtoClause): CreateClause => {
-    const patternParts: GraphPattern = {
-        type: "GraphPattern",
-        patternParts: [],
-        };
+    const graphPattern = getGraphPatterns(clause.content);
     return {
         type: "CreateClause",
         content: clause.content,
-        graphPattern: patternParts,
+        graphPattern: graphPattern[0],
     };
 }
 
