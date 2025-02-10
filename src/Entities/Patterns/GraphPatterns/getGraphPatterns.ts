@@ -1,11 +1,9 @@
 import { GraphPattern } from "../../../types";
+import { _parseGraphPattern } from "./_parseGraphPatterns";
+import { _validatePatternElements } from "./_validatePatternElements";
 
 const getGraphPatterns = (clauseContent: string): GraphPattern[] => {
-  const patternParts: GraphPattern = {
-    type: "GraphPattern",
-    patternParts: [],
-  };
-  return [patternParts];
+  return [];
 };
 
 export { getGraphPatterns };

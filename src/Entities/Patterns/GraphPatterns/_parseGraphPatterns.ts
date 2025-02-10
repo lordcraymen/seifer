@@ -7,7 +7,7 @@ import {
 } from "../../../types";
 
 /**
- * Splits the graph pattern inside the body of a single caluse into individual pattern parts.
+ * Splits the graph pattern inside the body of a single clause into individual pattern parts.
  * Pattern parts are separated by whitespace and optional commas, but but commas inside propertymaps are ignored.
  * @param clauseContent The content of the graph pattern.
  * @returns An array of pattern parts.
@@ -85,23 +85,6 @@ const _parsePatternElements = (patternString: string): RawPatternElement[] => {
   return rawPatternElements;
 };
 
-// factory funtions for node patterns
-const _parseNodePattern = (element: PatternElement): NodePattern => {
-  return {
-    type: "NodePattern",
-  };
-};
-
-// factory function for relationship patterns
-const _parseRelationshipPattern = (
-  element: PatternElement
-): RelationshipPattern => {
-  return {
-    type: "RelationshipPattern",
-    direction: "left-to-right",
-  };
-};
-
 // Parses the entire graph pattern content into a GraphPattern object.
 const _parseGraphPattern = (clauseContent: string): GraphPattern => ({
   type: "GraphPattern",
@@ -115,6 +98,4 @@ export {
   _parseGraphPattern,
   _separateGraphPatterns,
   _parsePatternElements,
-  _parseNodePattern,
-  _parseRelationshipPattern,
 };
