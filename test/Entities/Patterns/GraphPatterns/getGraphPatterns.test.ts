@@ -1,0 +1,1 @@
+import { getGraphPatterns } from '../../../../src/Entities/Patterns/GraphPatterns';
