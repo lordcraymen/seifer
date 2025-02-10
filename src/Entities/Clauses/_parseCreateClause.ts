@@ -11,7 +11,8 @@ const _findNodePatterns = (content: string): string[] => {
 }
 
 const _findRelationshipPatterns = (content: string): string[] => {
-    
+    return content.split(")").filter((part) => part.includes("-[") || part.includes("]->"));
+}
 
 
 /*Example CreateClause for "CREATE (p:Person {age: 42})"

@@ -12,13 +12,15 @@ import {
  * @param clauseContent The content of the graph pattern.
  * @returns An array of pattern parts.
  * @example
- * _splitPatternParts("(a:Person), (b:Person {name: 'Alice', age: 42}) (a)-[:KNOWS]->(b)")
- * // Returns ["(a:Person)", "(b:Person {name: 'Alice', age: 42})", "(a)-[:KNOWS]->(b)"]
+ * _splitPatternParts("(a:Person), (b:Person {name: 'Alice', age: 42}) (a)-[:KNOWS]->(b)(c:Person)")
+ * // Returns ["(a:Person)", "(b:Person {name: 'Alice', age: 42})", "(a)-[:KNOWS]->(b)", "(c:Person)"]
  */
-const _separateGraphPatterns = (patternString: string): string[] =>
-  patternString === ""
-    ? []
-    : patternString.split(/(\)\s*,*\s*\()/).filter(Boolean).map(part => part.trim());
+const _separateGraphPatterns = (patternString: string): string[] => {
+    const patternRegex = /(\([^()]*\)(?:\s*-\[[^\]]*\]-\s*\([^()]*\))*)/g;
+    return [...patternString.matchAll(patternRegex)].map(match => match[0].trim());
+  };
+  
+  
 
 // Parses a single pattern part into an array of PatternElements (Nodes and Relationships).
 const _parsePatternElements = (partString: string): PatternElement[] => {

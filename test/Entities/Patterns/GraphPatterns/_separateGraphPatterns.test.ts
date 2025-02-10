@@ -2,8 +2,8 @@ import { _separateGraphPatterns } from '../../../../src/Entities/Patterns/GraphP
 
 describe('_separateGraphPatterns', () => {
   it('should separate graph patterns by whitespace and commas', () => {
-    const patternString = '(a:Person), (b:Person {name: "Alice", age: 42}) (a)-[:KNOWS]->(b)';
-    const expected = ['(a:Person)', '(b:Person {name: "Alice", age: 42})', '(a)-[:KNOWS]->(b)'];
+    const patternString = '(a:Person), (b:Person {name: "Alice", age: 42}) (a)-[:KNOWS]->(b)(c:Person)';
+    const expected = ['(a:Person)', '(b:Person {name: "Alice", age: 42})', '(a)-[:KNOWS]->(b)', '(c:Person)'];
     expect(_separateGraphPatterns(patternString)).toStrictEqual(expected);
   });
 
