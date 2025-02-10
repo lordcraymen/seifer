@@ -15,10 +15,8 @@ import {
  * _splitPatternParts("(a:Person), (b:Person {name: 'Alice', age: 42}) (a)-[:KNOWS]->(b)(c:Person)")
  * // Returns ["(a:Person)", "(b:Person {name: 'Alice', age: 42})", "(a)-[:KNOWS]->(b)", "(c:Person)"]
  */
-const _separateGraphPatterns = (patternString: string): string[] => {
-    const patternRegex = /(\([^()]*\)(?:\s*-\[[^\]]*\]-\s*\([^()]*\))*)/g;
-    return [...patternString.matchAll(patternRegex)].map(match => match[0].trim());
-  };
+const _separateGraphPatterns = (patternString: string): string[] =>
+    patternString.split(/(?<=\))\s*,?\s*(?=\()/).filter(Boolean);
   
   
 
