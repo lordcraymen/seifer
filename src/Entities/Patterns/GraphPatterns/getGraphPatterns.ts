@@ -1,5 +1,5 @@
 import { GraphPattern } from "../../../types";
-import { _parseGraphPattern } from "./_parseGraphPatterns";
+import { _parseGraphPattern, _separateGraphPatterns } from "./_parseGraphPatterns";
 import { _validatePatternElements } from "./_validatePatternElements";
 
 /**
@@ -81,18 +81,7 @@ import { _validatePatternElements } from "./_validatePatternElements";
  * //   }
  * // ]
  */
-const getGraphPatterns = (clauseContent: string): GraphPattern[] => {
-  // Parse the clause content into an array of GraphPatterns.
-  const graphPatterns = _parseGraphPattern(clauseContent);
-
-  // Validate the pattern elements within each GraphPattern.
-  graphPatterns.forEach((graphPattern) => {
-    graphPattern.patternParts.forEach((patternPart) => {
-      _validatePatternElements(patternPart.elements);
-    });
-  });
-
-  return graphPatterns;
-};
+const getGraphPatterns = (clauseContent: string): GraphPattern[] =>  _separateGraphPatterns(clauseContent).map((part) =>
+    _parseGraphPattern(part));
 
 export { getGraphPatterns };

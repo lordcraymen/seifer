@@ -1,9 +1,6 @@
 import {
   GraphPattern,
   PatternPart,
-  PatternElement,
-  NodePattern,
-  RelationshipPattern,
 } from "../../../types";
 
 /**
